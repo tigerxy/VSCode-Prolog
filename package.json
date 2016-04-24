@@ -11,7 +11,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.consult"
+    "onCommand:extension.consult",
+    "onCommand:extension.query"
   ],
   "main": "./out/src/extension",
   "contributes": {

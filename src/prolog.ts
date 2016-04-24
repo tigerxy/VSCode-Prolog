@@ -2,17 +2,14 @@ import * as vscode from 'vscode';
 let i18next = require('i18next');
 export module prolog
 {
-    interface prologQueryContinue extends vscode.MessageItem
-    {
-        title: "continue"
-    }
-
     export class prolog
     {
         private spawn = require('child_process').spawn
         private prolog
         private output: vscode.OutputChannel
-        public lastQuery = "";
+        public consultedFile = ""
+        public lastQuery = ""
+
         constructor()
         {
             this.prolog = this.spawn('prolog', ['-q'])
@@ -53,6 +50,7 @@ export module prolog
 
         public consultFile(path: vscode.Uri)
         {
+            this.consultedFile = path.fsPath
             this.output.appendLine(`\n?- consult('${path.fsPath}').`)
             this.write(`consult("${path.fsPath}").\n`)
         }
@@ -74,9 +72,15 @@ export module prolog
         public continueQueryMessage()
         {
 
-            vscode.window.showInformationMessage(i18next.t("continueQueryExec"), i18next.t("yes")).then((value: string) =>
+            vscode.window.showInformationMessage<infoContinueQueryExecSelection>(i18next.t("continueQueryExec"), {
+                title: i18next.t("no"),
+                selection: yesNoCancel.no
+            },{
+                title: i18next.t("yes"),
+                selection: yesNoCancel.yes
+            }).then((value: infoContinueQueryExecSelection) =>
             {
-                if (value == "Yes")
+                if (value.selection == yesNoCancel.yes)
                 {
                     this.output.appendLine(";")
                     this.write(';\n')
@@ -93,5 +97,15 @@ export module prolog
                 }
             })
         }
+    }
+    enum yesNoCancel
+    {
+        yes,
+        no,
+        cancel
+    }
+    interface infoContinueQueryExecSelection extends vscode.MessageItem
+    {
+        selection: yesNoCancel
     }
 }

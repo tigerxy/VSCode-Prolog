@@ -19,9 +19,10 @@ export function activate(context: vscode.ExtensionContext)
 					"notProlog": "Active document is not a Prolog file.",
 					"insertPrologQuery": "Insert your Prolog Query",
 					"queryEndDot": "Query must end with dot",
-					"noFile":"No file opened.",
-					"continueQueryExec":"Continue with query execution?",
-					"yes":"Yes"
+					"noFile": "No file opened.",
+					"continueQueryExec": "Continue with query execution?",
+					"yes": "Yes",
+					"no": "No"
 				}
 			},
 			"de": {
@@ -29,9 +30,10 @@ export function activate(context: vscode.ExtensionContext)
 					"notProlog": "Aktuelles Dokument ist keine Prolog Datei.",
 					"insertPrologQuery": "Geben Sie hier ihre Prolog Abfrage ein",
 					"queryEndDot": "Abfrage muss mit einem Punkt enden",
-					"noFile":"Keine Datei geöffnet.",
-					"continueQueryExec":"Abfrage fortsetzen?",
-					"yes":"Ja"
+					"noFile": "Keine Datei geöffnet.",
+					"continueQueryExec": "Abfrage fortsetzen?",
+					"yes": "Ja",
+					"no": "Nein"
 				}
 			}
 		},
@@ -68,23 +70,41 @@ export function activate(context: vscode.ExtensionContext)
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInputBox({
-			validateInput: (value: string) =>
-			{
-				if (!value.endsWith("."))
-					return i18next.t("queryEndDot")
-				return ""
-			},
-			prompt: i18next.t("insertPrologQuery"),
-			value: pl.lastQuery
-		}).then((value: string) =>
+		var doc = vscode.window.activeTextEditor.document
+		if (doc != undefined)
 		{
-			if (value != undefined)
+			if (doc.fileName.endsWith(".pl"))
 			{
-				pl.lastQuery = value
-				pl.sendQuery(value)
+				if (pl.consultedFile != vscode.window.activeTextEditor.document.uri.fsPath)
+					pl.consultFile(vscode.window.activeTextEditor.document.uri)
+					
+				vscode.window.showInputBox({
+					validateInput: (value: string) =>
+					{
+						if (!value.endsWith("."))
+							return i18next.t("queryEndDot")
+						return ""
+					},
+					prompt: i18next.t("insertPrologQuery"),
+					value: pl.lastQuery
+				}).then((value: string) =>
+				{
+					if (value != undefined)
+					{
+						pl.lastQuery = value
+						pl.sendQuery(value)
+					}
+				})
 			}
-		})
+			else
+			{
+				vscode.window.showErrorMessage(i18next.t("notProlog"))
+			}
+		}
+		else
+		{
+			vscode.window.showErrorMessage(i18next.t("noFile"))
+		}
 	});
 	let onsave = vscode.workspace.onDidSaveTextDocument((e: vscode.TextDocument) =>
 	{
