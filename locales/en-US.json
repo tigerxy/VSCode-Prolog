@@ -1,0 +1,9 @@
+{
+    "notProlog": "Active document is not a Prolog file.",
+    "insertPrologQuery": "Insert your Prolog Query",
+    "queryEndDot": "Query must end with dot",
+    "noFile": "No file opened.",
+    "continueQueryExec": "Continue with query execution?",
+    "yes": "Yes",
+    "no": "No"
+}

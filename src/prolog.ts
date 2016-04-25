@@ -12,7 +12,17 @@ export module prolog
 
         constructor()
         {
-            this.prolog = this.spawn('prolog', ['-q'])
+            switch (process.platform) {
+                case 'win32':
+                    this.prolog = this.spawn('C:\Program Files\swipl\bin\swipl.exe', ['-q'])
+                    break;
+                case 'linux':
+                    this.prolog = this.spawn('swipl', ['-q'])
+                    break;
+            
+                default:
+                    throw "Plattform not supported.";
+            }
 
             this.prolog.stdout.on('data', (data: Buffer) =>
             {

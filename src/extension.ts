@@ -11,12 +11,33 @@ let pl: prolog.prolog;
 export function activate(context: vscode.ExtensionContext)
 {
 	i18next.init({
-		"debug": false,
-		"lng": vscode.env.language,
-		"backend": {
-			"loadPath": "locales/{{lng}}.json"
+		debug: false,
+		lng: vscode.env.language,
+		resources: {
+			"de": {
+				"translation": {
+					"notProlog": "Aktuelles Dokument ist keine Prolog Datei.",
+					"insertPrologQuery": "Geben Sie hier ihre Prolog Abfrage ein",
+					"queryEndDot": "Abfrage muss mit einem Punkt enden",
+					"noFile": "Keine Datei geöffnet.",
+					"continueQueryExec": "Abfrage fortsetzen?",
+					"yes": "Ja",
+					"no": "Nein"
+				}
+			},
+			"en-US": {
+				"translation": {
+					"notProlog": "Active document is not a Prolog file.",
+					"insertPrologQuery": "Insert your Prolog Query",
+					"queryEndDot": "Query must end with dot",
+					"noFile": "No file opened.",
+					"continueQueryExec": "Continue with query execution?",
+					"yes": "Yes",
+					"no": "No"
+				}
+			}
 		},
-		"fallbackLng": "en-US"
+		fallbackLng: "en-US"
 	});
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated

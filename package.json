@@ -1,9 +1,20 @@
 {
   "name": "prolog",
-  "displayName": "Prolog",
-  "description": "Prolog for Visual Studio Code",
+  "displayName": "SWI-Prolog",
+  "description": "SWI-Prolog for Visual Studio Code",
   "version": "0.0.1",
   "publisher": "RolandGreim",
+  "icon": "images/swipl.png",
+  "author": {
+    "name": "Roland Greim - http://www.rolandgreim.de/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tigerxy/VSCode-Prolog"
+  },
+  "bugs": {
+    "url": "https://github.com/tigerxy/VSCode-Prolog/issues"
+  },
   "engines": {
     "vscode": "^0.10.10"
   },
@@ -21,7 +32,7 @@
       {
         "id": "prolog",
         "aliases": [
-          "Prolog",
+          "SWI-Prolog",
           "prolog"
         ],
         "extensions": [
