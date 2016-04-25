@@ -8,6 +8,7 @@
     "vscode": "^0.10.10"
   },
   "categories": [
+		"Languages",
     "Other"
   ],
   "activationEvents": [
@@ -16,6 +17,27 @@
   ],
   "main": "./out/src/extension",
   "contributes": {
+    "languages": [
+      {
+        "id": "prolog",
+        "aliases": [
+          "Prolog",
+          "prolog"
+        ],
+        "extensions": [
+          ".pl",
+          ".pro"
+        ],
+        "configuration": "./prolog.configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "prolog",
+        "scopeName": "source.prolog",
+        "path": "./syntaxes/prolog.tmLanguage"
+      }
+    ],
     "commands": [
       {
         "command": "extension.consult",

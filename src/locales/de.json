@@ -1,0 +1,11 @@
+{
+    "translation": {
+        "notProlog": "Aktuelles Dokument ist keine Prolog Datei.",
+        "insertPrologQuery": "Geben Sie hier ihre Prolog Abfrage ein",
+        "queryEndDot": "Abfrage muss mit einem Punkt enden",
+        "noFile": "Keine Datei geöffnet.",
+        "continueQueryExec": "Abfrage fortsetzen?",
+        "yes": "Ja",
+        "no": "Nein"
+    }
+}

@@ -13,29 +13,8 @@ export function activate(context: vscode.ExtensionContext)
 	i18next.init({
 		"debug": false,
 		"lng": vscode.env.language,
-		"resources": {
-			"en-US": {
-				"translation": {
-					"notProlog": "Active document is not a Prolog file.",
-					"insertPrologQuery": "Insert your Prolog Query",
-					"queryEndDot": "Query must end with dot",
-					"noFile": "No file opened.",
-					"continueQueryExec": "Continue with query execution?",
-					"yes": "Yes",
-					"no": "No"
-				}
-			},
-			"de": {
-				"translation": {
-					"notProlog": "Aktuelles Dokument ist keine Prolog Datei.",
-					"insertPrologQuery": "Geben Sie hier ihre Prolog Abfrage ein",
-					"queryEndDot": "Abfrage muss mit einem Punkt enden",
-					"noFile": "Keine Datei geöffnet.",
-					"continueQueryExec": "Abfrage fortsetzen?",
-					"yes": "Ja",
-					"no": "Nein"
-				}
-			}
+		"backend": {
+			"loadPath": "locales/{{lng}}.json"
 		},
 		"fallbackLng": "en-US"
 	});
@@ -77,7 +56,7 @@ export function activate(context: vscode.ExtensionContext)
 			{
 				if (pl.consultedFile != vscode.window.activeTextEditor.document.uri.fsPath)
 					pl.consultFile(vscode.window.activeTextEditor.document.uri)
-					
+
 				vscode.window.showInputBox({
 					validateInput: (value: string) =>
 					{
